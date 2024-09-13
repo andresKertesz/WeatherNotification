@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "EVpIP/60X+d6Ic1wgIdFVZp3/e2UBW/SLDdbf4kMhtiIW/kU4E+7VMaYrF9i5vs3L3gEkpPvrRrZXtjGoi3tkQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Elan\\source\\repos\\WeatherNotification\\WeatherNotification.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Elan\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
