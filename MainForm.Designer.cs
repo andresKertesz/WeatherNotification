@@ -31,19 +31,21 @@
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             trayIcon = new NotifyIcon(components);
-            pictureBox1 = new PictureBox();
+            pboxIcon = new PictureBox();
             colorDialog = new ColorDialog();
-            btnForeground = new Button();
-            btnBackground = new Button();
             grpBox = new GroupBox();
-            pnlBackground = new Panel();
-            pnlForeground = new Panel();
-            groupBox1 = new GroupBox();
-            radioButtonFahrenheit = new RadioButton();
-            radioBtnCelsius = new RadioButton();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            lblHumidity = new Label();
+            lblHumidityText = new Label();
+            lblWindSpeedData = new Label();
+            lblWindSpeed = new Label();
+            lblFeelsLike = new Label();
+            lblReal = new Label();
+            lblFeelsLikeData = new Label();
+            lblTemperature = new Label();
+            lblLastUpdate = new Label();
+            lblLocation = new Label();
+            ((System.ComponentModel.ISupportInitialize)pboxIcon).BeginInit();
             grpBox.SuspendLayout();
-            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // trayIcon
@@ -52,132 +54,171 @@
             trayIcon.Visible = true;
             trayIcon.MouseDoubleClick += trayIcon_MouseDoubleClick;
             // 
-            // pictureBox1
+            // pboxIcon
             // 
-            pictureBox1.Location = new Point(182, 22);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(61, 62);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            pboxIcon.Location = new Point(167, 22);
+            pboxIcon.Name = "pboxIcon";
+            pboxIcon.Size = new Size(76, 78);
+            pboxIcon.TabIndex = 0;
+            pboxIcon.TabStop = false;
             // 
             // colorDialog
             // 
             colorDialog.SolidColorOnly = true;
             // 
-            // btnForeground
-            // 
-            btnForeground.Location = new Point(6, 22);
-            btnForeground.Name = "btnForeground";
-            btnForeground.Size = new Size(101, 24);
-            btnForeground.TabIndex = 1;
-            btnForeground.Text = "Foreground";
-            btnForeground.UseVisualStyleBackColor = true;
-            btnForeground.Click += btnForeground_Click;
-            // 
-            // btnBackground
-            // 
-            btnBackground.Location = new Point(6, 61);
-            btnBackground.Name = "btnBackground";
-            btnBackground.Size = new Size(101, 23);
-            btnBackground.TabIndex = 2;
-            btnBackground.Text = "Background";
-            btnBackground.UseVisualStyleBackColor = true;
-            btnBackground.Click += btnBackground_Click;
-            // 
             // grpBox
             // 
-            grpBox.Controls.Add(pnlBackground);
-            grpBox.Controls.Add(pnlForeground);
-            grpBox.Controls.Add(pictureBox1);
-            grpBox.Controls.Add(btnBackground);
-            grpBox.Controls.Add(btnForeground);
+            grpBox.Controls.Add(lblHumidity);
+            grpBox.Controls.Add(lblHumidityText);
+            grpBox.Controls.Add(lblWindSpeedData);
+            grpBox.Controls.Add(lblWindSpeed);
+            grpBox.Controls.Add(lblFeelsLike);
+            grpBox.Controls.Add(lblReal);
+            grpBox.Controls.Add(lblFeelsLikeData);
+            grpBox.Controls.Add(lblTemperature);
+            grpBox.Controls.Add(pboxIcon);
             grpBox.Location = new Point(12, 12);
             grpBox.Name = "grpBox";
-            grpBox.Size = new Size(249, 106);
+            grpBox.Size = new Size(249, 127);
             grpBox.TabIndex = 3;
             grpBox.TabStop = false;
-            grpBox.Text = "Icon Color";
+            grpBox.Text = "Temperature";
             // 
-            // pnlBackground
+            // lblHumidity
             // 
-            pnlBackground.Location = new Point(123, 60);
-            pnlBackground.Name = "pnlBackground";
-            pnlBackground.Size = new Size(24, 24);
-            pnlBackground.TabIndex = 4;
+            lblHumidity.AutoSize = true;
+            lblHumidity.Location = new Point(84, 85);
+            lblHumidity.Name = "lblHumidity";
+            lblHumidity.Size = new Size(42, 15);
+            lblHumidity.TabIndex = 8;
+            lblHumidity.Text = "15 kph";
             // 
-            // pnlForeground
+            // lblHumidityText
             // 
-            pnlForeground.Location = new Point(123, 22);
-            pnlForeground.Name = "pnlForeground";
-            pnlForeground.Size = new Size(24, 24);
-            pnlForeground.TabIndex = 3;
+            lblHumidityText.AutoSize = true;
+            lblHumidityText.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblHumidityText.Location = new Point(13, 85);
+            lblHumidityText.Name = "lblHumidityText";
+            lblHumidityText.Size = new Size(58, 15);
+            lblHumidityText.TabIndex = 7;
+            lblHumidityText.Text = "Humidity";
             // 
-            // groupBox1
+            // lblWindSpeedData
             // 
-            groupBox1.Controls.Add(radioButtonFahrenheit);
-            groupBox1.Controls.Add(radioBtnCelsius);
-            groupBox1.Location = new Point(12, 124);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(249, 55);
-            groupBox1.TabIndex = 4;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "System";
+            lblWindSpeedData.AutoSize = true;
+            lblWindSpeedData.Location = new Point(84, 64);
+            lblWindSpeedData.Name = "lblWindSpeedData";
+            lblWindSpeedData.Size = new Size(42, 15);
+            lblWindSpeedData.TabIndex = 6;
+            lblWindSpeedData.Text = "15 kph";
             // 
-            // radioButtonFahrenheit
+            // lblWindSpeed
             // 
-            radioButtonFahrenheit.AutoSize = true;
-            radioButtonFahrenheit.Location = new Point(123, 22);
-            radioButtonFahrenheit.Name = "radioButtonFahrenheit";
-            radioButtonFahrenheit.Size = new Size(81, 19);
-            radioButtonFahrenheit.TabIndex = 1;
-            radioButtonFahrenheit.Text = "Fahrenheit";
-            radioButtonFahrenheit.UseVisualStyleBackColor = true;
+            lblWindSpeed.AutoSize = true;
+            lblWindSpeed.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblWindSpeed.Location = new Point(13, 64);
+            lblWindSpeed.Name = "lblWindSpeed";
+            lblWindSpeed.Size = new Size(36, 15);
+            lblWindSpeed.TabIndex = 5;
+            lblWindSpeed.Text = "Wind";
             // 
-            // radioBtnCelsius
+            // lblFeelsLike
             // 
-            radioBtnCelsius.AutoSize = true;
-            radioBtnCelsius.Checked = true;
-            radioBtnCelsius.Location = new Point(13, 22);
-            radioBtnCelsius.Name = "radioBtnCelsius";
-            radioBtnCelsius.Size = new Size(62, 19);
-            radioBtnCelsius.TabIndex = 0;
-            radioBtnCelsius.TabStop = true;
-            radioBtnCelsius.Text = "Celsius";
-            radioBtnCelsius.UseVisualStyleBackColor = true;
+            lblFeelsLike.AutoSize = true;
+            lblFeelsLike.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblFeelsLike.Location = new Point(13, 43);
+            lblFeelsLike.Name = "lblFeelsLike";
+            lblFeelsLike.Size = new Size(58, 15);
+            lblFeelsLike.TabIndex = 4;
+            lblFeelsLike.Text = "Feels like";
+            // 
+            // lblReal
+            // 
+            lblReal.AutoSize = true;
+            lblReal.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblReal.Location = new Point(13, 22);
+            lblReal.Name = "lblReal";
+            lblReal.Size = new Size(65, 15);
+            lblReal.TabIndex = 3;
+            lblReal.Text = "Real Temp";
+            // 
+            // lblFeelsLikeData
+            // 
+            lblFeelsLikeData.AutoSize = true;
+            lblFeelsLikeData.Location = new Point(84, 43);
+            lblFeelsLikeData.Name = "lblFeelsLikeData";
+            lblFeelsLikeData.Size = new Size(35, 15);
+            lblFeelsLikeData.TabIndex = 2;
+            lblFeelsLikeData.Text = "26° C";
+            // 
+            // lblTemperature
+            // 
+            lblTemperature.AutoSize = true;
+            lblTemperature.Location = new Point(84, 22);
+            lblTemperature.Name = "lblTemperature";
+            lblTemperature.Size = new Size(35, 15);
+            lblTemperature.TabIndex = 1;
+            lblTemperature.Text = "25° C";
+            // 
+            // lblLastUpdate
+            // 
+            lblLastUpdate.AutoSize = true;
+            lblLastUpdate.Location = new Point(12, 171);
+            lblLastUpdate.Name = "lblLastUpdate";
+            lblLastUpdate.Size = new Size(108, 15);
+            lblLastUpdate.TabIndex = 5;
+            lblLastUpdate.Text = "Last updated: 00:00";
+            // 
+            // lblLocation
+            // 
+            lblLocation.AutoSize = true;
+            lblLocation.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblLocation.Location = new Point(12, 142);
+            lblLocation.Name = "lblLocation";
+            lblLocation.Size = new Size(155, 15);
+            lblLocation.TabIndex = 6;
+            lblLocation.Text = "Location: Olivos, Argentina\r\n";
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(270, 185);
-            Controls.Add(groupBox1);
+            ClientSize = new Size(270, 195);
+            Controls.Add(lblLocation);
+            Controls.Add(lblLastUpdate);
             Controls.Add(grpBox);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "MainForm";
             ShowInTaskbar = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Weather Notificator";
+            FormClosing += MainForm_FormClosing;
             Load += MainForm_LoadAsync;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pboxIcon).EndInit();
             grpBox.ResumeLayout(false);
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            grpBox.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private NotifyIcon trayIcon;
-        private PictureBox pictureBox1;
+        private PictureBox pboxIcon;
         private ColorDialog colorDialog;
-        private Button btnForeground;
-        private Button btnBackground;
         private GroupBox grpBox;
-        private Panel pnlBackground;
-        private Panel pnlForeground;
-        private GroupBox groupBox1;
-        private RadioButton radioButtonFahrenheit;
-        private RadioButton radioBtnCelsius;
+        private Label lblFeelsLikeData;
+        private Label lblTemperature;
+        private Label lblWindSpeed;
+        private Label lblFeelsLike;
+        private Label lblReal;
+        private Label lblWindSpeedData;
+        private Label lblHumidity;
+        private Label lblHumidityText;
+        private Label lblLastUpdate;
+        private Label lblLocation;
     }
 }

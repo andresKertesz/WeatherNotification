@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace WeatherNotification.Controllers
 {
@@ -18,6 +20,17 @@ namespace WeatherNotification.Controllers
             Bitmap bitmap = DrawText(text, imageFont);
             return Icon.FromHandle(bitmap.GetHicon());
 
+        }
+
+        public static Image GetImageFromUrl(string url)
+        {
+            string fullUrl = $"https://{url}";
+            HttpClient client = new HttpClient();
+            HttpRequestMessage httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, fullUrl);
+
+            var response = client.Send(httpRequestMessage);
+            var stream = response.Content.ReadAsStream();
+            return Bitmap.FromStream(stream);
         }
 
         private static Bitmap DrawText(string text, Font imageFont)

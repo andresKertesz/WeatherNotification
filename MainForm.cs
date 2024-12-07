@@ -1,5 +1,6 @@
 using System.Drawing.Imaging;
 using System.Runtime.CompilerServices;
+using System.Security.Policy;
 using WeatherNotification.Controllers;
 using WeatherNotification.Model;
 
@@ -11,9 +12,9 @@ namespace WeatherNotification
         bool _firstTimeDone = false;
         private const int HALF_HOUR = 1800000;
         private const string DISCONNECTED = "DC";
-        
+
         private GeolocationData? CurrentPosition { get; set; }
-        private WeatherData? Weather { get;set; }
+        private WeatherData? Weather { get; set; }
         public MainForm()
         {
             InitializeComponent();
@@ -37,7 +38,7 @@ namespace WeatherNotification
             //pictureBox1.Image = IconController.GenerateImage();
 
         }
-        
+
         private async void MainForm_LoadAsync(object sender, EventArgs e)
         {
             CurrentPosition = await CurrentLocationControler.GetCurrentPosition();
@@ -66,7 +67,7 @@ namespace WeatherNotification
             {
                 Thread.Sleep(HALF_HOUR);
 
-                WeatherData? Weather = null;
+                Weather = null;
                 if (CurrentPosition != null)
                     Weather = await WeatherController.GetWeatherDataAsync(CurrentPosition.Latitude, CurrentPosition.Longitude);
 
@@ -92,36 +93,10 @@ namespace WeatherNotification
             trayIcon.Icon = IconController.GenerateIcon(DISCONNECTED);
         }
 
-        private void btnForeground_Click(object sender, EventArgs e)
-        {
-            colorDialog.Color = IconController.ForegroundColor;
-
-            Color? selectedColor = ShowColorDialog();
-            if (selectedColor != null)
-            {
-                IconController.ForegroundColor = selectedColor.Value;
-                pnlForeground.BackColor = IconController.ForegroundColor;
-            }
-            RefreshIconImage();
-        }
-
-        private void btnBackground_Click(object sender, EventArgs e)
-        {
-            colorDialog.Color = IconController.BackgroundColor;
-
-            Color? selectedColor = ShowColorDialog();
-            if (selectedColor != null)
-            {
-                IconController.BackgroundColor = selectedColor.Value;
-                pnlBackground.BackColor = IconController.BackgroundColor;
-            }
-            RefreshIconImage(true);
-        }
-
 
         private Color? ShowColorDialog()
         {
-            
+
             var dr = colorDialog.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
@@ -134,9 +109,66 @@ namespace WeatherNotification
 
         private void trayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            /*
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.WindowState = FormWindowState.Normal;*/
+            if(this.WindowState != FormWindowState.Normal)
+            {
+
+                LoadDataPanel();
+                this.StartPosition = FormStartPosition.CenterScreen;
+                this.TopLevel = true;
+                this.Show();
+                this.WindowState = FormWindowState.Normal;
+            }else if(WindowState == FormWindowState.Normal)
+            {
+                BringFromToFront();
+            }
+            
+        }
+
+        private void BringFromToFront()
+        {
+            this.WindowState = FormWindowState.Minimized;
+            this.Show();
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        private void LoadDataPanel()
+        {
+            if(Weather == null || CurrentPosition == null)
+            {
+                return;
+            }
+            lblFeelsLikeData.Text = Weather.Current.FeelsLikeCelsius.ToString();
+            lblTemperature.Text = Weather.Current.TemperatureCelsius.ToString();
+            lblWindSpeedData.Text = $"{Weather.Current.WindSpeedKph}kph";
+            lblHumidity.Text = $"{Weather.Current.Humidity}%";
+
+            lblLastUpdate.Text = $"Last update: {Weather.Current.LastUpdated}";
+            lblLocation.Text = $"{CurrentPosition.City}, {CurrentPosition.RegionName}";
+
+            LoadPictureBox();
+        }
+
+        private void LoadPictureBox()
+        {
+
+            if(Weather == null)
+            {
+                return;
+            }
+
+            pboxIcon.Image = IconController.GetImageFromUrl(Weather.Current.Condition.IconUrl.Replace("//",""));
+
+        }
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+            if(e.CloseReason == CloseReason.UserClosing)
+            {
+                WindowState = FormWindowState.Minimized;
+                e.Cancel = true;
+                this.Hide();
+            }
+            
         }
     }
 }
